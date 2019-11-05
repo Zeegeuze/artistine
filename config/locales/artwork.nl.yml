@@ -1,0 +1,20 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        artwork:
+          attributes:
+            
+    models:
+      artwork:
+        one: Kunstwerk
+        other: Kunstwerken
+    attributes:
+      artwork:
+        name: Naam
+        description: Beschrijving
+        price: Prijs
+        created_at: Aangemaakt op
+        updated_at: Aangepast op
+        picture: foto
+        pictures: foto's
