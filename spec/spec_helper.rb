@@ -94,3 +94,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
