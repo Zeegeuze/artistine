@@ -3,9 +3,7 @@
 ActiveAdmin.register Artwork do
 
   permit_params :name, :description, :price
-  
-  
-  
+
   index do
     column :id
     column :name
@@ -14,6 +12,7 @@ ActiveAdmin.register Artwork do
     end
     column :description
     column :created_at
+    actions
   end
   
   show do
