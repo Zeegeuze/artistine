@@ -3,6 +3,15 @@
 ActiveAdmin.register Artwork do
   permit_params :name, :description, :price, :photo
 
+  controller do
+    def create
+      @artwork = current_admin_user.artworks.new(permitted_params[:artwork])
+
+      transaction_notice = "Het kunstwerk werk correct toegevoegd."
+      create!(notice: transaction_notice) { admin_artworks_path }
+    end
+  end
+
   index do
     column :id
     column :name
@@ -18,26 +27,25 @@ ActiveAdmin.register Artwork do
     
   columns do
     column do
-      panel "1", style: "text-align: center" do
+      panel "Photo's", style: "text-align: center" do
         cl_image_tag  artwork.photo, height: 400, width: 400, crop: :fill unless artwork.photo.nil?
       end
     end
     column do
-      panel "col 2 pan 1" do
-        columns do
-          panel "Boek gegevens" do
-            attributes_table_for artwork do
-              row :name
-              row :price do |artwork|
-                number_to_currency(artwork.price)
-              end
-              row :description
-            end
+      panel "Specificaties" do
+        attributes_table_for artwork do
+          row :name
+          row :price do |artwork|
+            number_to_currency(artwork.price)
           end
         end
-        panel "Korte samenvatting" do
+      end
+      panel "Korte samenvatting" do
+        attributes_table_for artwork do
+          row :description
         end
       end
+    end
 
 
       # panel "Opmerkingen van collega's binnen volgende bibliotheek verbanden: #{current_user.library_associations.map { |l_a| l_a.name }.uniq.join(', ')}" do
@@ -65,7 +73,6 @@ ActiveAdmin.register Artwork do
       #     end
       #     f.submit "Plaats opmerking"
       #   end
-      end
     end
   end
 

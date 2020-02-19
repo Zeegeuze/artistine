@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 2020_02_05_173220) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "photo"
+    t.bigint "admin_user_id"
+    t.index ["admin_user_id"], name: "index_artworks_on_admin_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +86,5 @@ ActiveRecord::Schema.define(version: 2020_02_05_173220) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "artworks", "admin_users"
 end

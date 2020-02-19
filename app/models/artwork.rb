@@ -5,6 +5,8 @@ class Artwork < ApplicationRecord
   
   mount_uploader :photo, PhotosUploader
 
+  belongs_to :admin_user, inverse_of: :artworks
+
   # def price(num)
   #   @view.number_to_currency(num)
   # end

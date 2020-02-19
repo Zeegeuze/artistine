@@ -251,6 +251,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rspec-collection_matchers (1.2.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -365,6 +367,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 6.0.0)
   rails-i18n (~> 6.0.0)
+  rspec-collection_matchers
   rspec-rails (~> 3.8)
   sass-rails (~> 5)
   selenium-webdriver
