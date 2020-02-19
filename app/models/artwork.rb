@@ -7,6 +7,9 @@ class Artwork < ApplicationRecord
 
   belongs_to :admin_user, inverse_of: :artworks
 
+  validates :name, presence: true
+  validates :description, presence: true
+
   # def price(num)
   #   @view.number_to_currency(num)
   # end
