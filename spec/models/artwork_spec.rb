@@ -7,6 +7,10 @@ describe Artwork do
     it "is valid" do
       expect(create(:artwork)).to be_valid
     end
+
+    it "must have an admin_user" do
+      expect(build(:artwork, admin_user: nil)).to have(1).error_on(:admin_user)
+    end
   end
 
   describe "scopes" do
