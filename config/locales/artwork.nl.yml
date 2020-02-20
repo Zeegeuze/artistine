@@ -1,4 +1,14 @@
 nl:
+  formtastic:
+    :yes: 'Ja'
+    :no: 'Nee'
+    :create: '%{model} aanmaken'
+    :update: '%{model} updaten'
+    :submit: '%{model} bevestigen'
+    :cancel: '%{model} annuleren'
+    :reset: '%{model} opnieuw instellen'
+    :required: 'verplicht'
+
   activerecord:
     errors:
       models:
