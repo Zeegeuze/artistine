@@ -12,6 +12,12 @@ ActiveAdmin.register Artwork do
     end
   end
 
+  config.clear_action_items!
+
+  action_item only: :index do
+      link_to "Nieuw kunstwerk" , "/admin/artworks/new" 
+  end
+
   index do
     column :id
     column :name
