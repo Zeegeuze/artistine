@@ -14,4 +14,11 @@ class Artwork < ApplicationRecord
   #   @view.number_to_currency(num)
   # end
 
+  def set_as_published!
+    self.update published: true
+  end
+
+  def remove_published!
+    self.update published: false
+  end
 end

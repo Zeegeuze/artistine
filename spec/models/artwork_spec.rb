@@ -26,6 +26,28 @@ describe Artwork do
   end
 
   describe "instance methods" do
+    describe "set_as_published" do
+      it "changes status if called" do
+        artwork = create(:artwork)
 
+        expect(artwork.published).to be_falsey
+
+        artwork.set_as_published!
+
+        expect(artwork.published).to be_truthy
+      end
+
+      describe "remove_published" do
+        it "changes status if called" do
+          artwork = create(:artwork, published: true)
+
+          expect(artwork.published).to be_truthy
+
+          artwork.remove_published!
+
+          expect(artwork.published).to be_falsey
+        end
+      end
+    end
   end
 end
