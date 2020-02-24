@@ -21,8 +21,22 @@ ActiveAdmin.register Artwork do
   index do
     column :id
     column :name
-    column :price do |cbl|
-      number_to_currency(cbl.price)
+    column :published do |artwork|
+      if artwork.published
+        status_tag "Ja", class: "green"
+      else
+        status_tag "Nee", class: "red"
+      end
+    end
+    column "Zichtbaar / onzichtbaar" do |artwork|
+      if artwork.published
+        button_to "Maak onzichtbaar", remove_published_admin_artwork_path(artwork.id), method: :patch
+      else
+        button_to "Maak zichtbaar", set_as_published_admin_artwork_path(artwork.id), method: :patch
+      end
+    end
+    column :price do |artwork|
+      number_to_currency(artwork.price)
     end
     column :description
     column :created_at
@@ -41,6 +55,20 @@ ActiveAdmin.register Artwork do
       panel "Specificaties" do
         attributes_table_for artwork do
           row :name
+          row :published do |artwork|
+            if artwork.published
+              status_tag "Ja", class: "green"
+            else
+              status_tag "Nee", class: "red"
+            end
+          end
+          row " " do |artwork|
+            if artwork.published
+                button_to "Maak onzichtbaar", remove_published_admin_artwork_path, method: :patch
+            else
+                button_to "Maak zichtbaar", set_as_published_admin_artwork_path, method: :patch
+            end
+          end
           row :price do |artwork|
             number_to_currency(artwork.price)
           end
@@ -85,10 +113,21 @@ ActiveAdmin.register Artwork do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :published, as: :select, collection: [[:ja, true], [:nee, false]]
       f.input :price
       f.input :description
       f.input :photo, as: :file
     end
     f.actions
+  end  
+
+  member_action :set_as_published, method: :patch do
+    resource.update! published: true
+    redirect_back fallback_location: admin_artwork_path(resource), notice: "Kunstwerk werd online geplaatst"
+  end
+
+  member_action :remove_published, method: :patch do
+    resource.update! published: false
+    redirect_back fallback_location: admin_artwork_path(resource), notice: "Kunstwerk is niet meer zichtbaar"
   end
 end

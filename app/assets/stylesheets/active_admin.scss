@@ -15,3 +15,18 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+/* line 20, app/assets/stylesheets/active_admin.scss */
+.status_tag.ok, .status_tag.published, .status_tag.complete, .status_tag.completed, .status_tag.green {
+  background: #8daa92;
+}
+
+/* line 21, app/assets/stylesheets/active_admin.scss */
+.status_tag.warn, .status_tag.warning, .status_tag.orange {
+  background: #e29b20;
+}
+
+/* line 22, app/assets/stylesheets/active_admin.scss */
+.status_tag.error, .status_tag.errored, .status_tag.red {
+  background: #d45f53;
+  color: white;
+}
