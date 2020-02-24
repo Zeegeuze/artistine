@@ -5,4 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+artworks = []
+
+4.times do
+  artwork = Artwork.new(
+    admin_user: AdminUser.first,
+    name: Faker::Book.title,
+    description: Faker::TvShows::TheITCrowd.quote,
+    price: rand(1500)
+  )
+
+  artwork.save!
+  artworks << artwork
+end
