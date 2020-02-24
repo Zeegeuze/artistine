@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Artwork do
   permit_params :name, :description, :price, :photo
+  config.batch_actions = false
 
   controller do
     def create
