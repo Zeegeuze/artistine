@@ -54,6 +54,7 @@ ActiveAdmin.register Artwork do
         panel "Foto's", style: "text-align: center" do
           artwork.images.each do |image|
             span cl_image_tag image.key, height: 200, width: 200, crop: :fill
+            span link_to "Verwijder", delete_category_image_admin_artwork_path(image.id), method: :delete, data: { confirm: 'Are you sure?' }
           end
         end
       end
@@ -135,5 +136,11 @@ ActiveAdmin.register Artwork do
   member_action :remove_published, method: :patch do
     resource.update! published: false
     redirect_back fallback_location: admin_artwork_path(resource), notice: "Kunstwerk is niet meer zichtbaar"
+  end
+
+  member_action :delete_category_image, method: :delete do
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    redirect_back(fallback_location: admin_artworks_path)   
   end
 end
