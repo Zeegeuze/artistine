@@ -19,6 +19,10 @@ ActiveAdmin.register Artwork do
       link_to "Nieuw kunstwerk" , "/admin/artworks/new" 
   end
 
+  action_item "Bewerk kunstwerk", only: :show do
+      link_to "Bewerk kunstwerk" , edit_admin_artwork_path()
+  end
+
   index do
     column :id
     column :name
