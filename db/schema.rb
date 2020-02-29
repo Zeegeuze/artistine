@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_02_22_193726) do
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "photo"
     t.bigint "admin_user_id"
     t.boolean "published", default: false, null: false
     t.index ["admin_user_id"], name: "index_artworks_on_admin_user_id"

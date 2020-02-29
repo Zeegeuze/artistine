@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Artwork < ApplicationRecord
-  has_one_attached :photo
+  has_one_attached :image
   
-  mount_uploader :photo, PhotosUploader
+  # mount_uploader :photo, PhotosUploader
 
   belongs_to :admin_user, inverse_of: :artworks
 

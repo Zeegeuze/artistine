@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Artwork do
-  permit_params :name, :description, :price, :photo
+  permit_params :name, :description, :price, :image
   config.batch_actions = false
 
   controller do
@@ -52,8 +52,9 @@ ActiveAdmin.register Artwork do
     
   columns do
     column do
-      panel "Photo's", style: "text-align: center" do
-        cl_image_tag  artwork.photo, height: 400, width: 400, crop: :fill unless artwork.photo.nil?
+      panel "Foto's", style: "text-align: center" do
+        image_tag artwork.image, height: 400, width: 400, crop: :fill unless artwork.image.nil?
+        # cl_image_tag  artwork.photo, height: 400, width: 400, crop: :fill unless artwork.photo.nil?
       end
     end
     column do
@@ -121,7 +122,8 @@ ActiveAdmin.register Artwork do
       f.input :published, as: :select, collection: [[:ja, true], [:nee, false]]
       f.input :price
       f.input :description
-      f.input :photo, as: :file
+      # cl_image_upload_tag(:image_id)
+      f.input :image, as: :file
     end
     f.actions
   end  
