@@ -5,6 +5,8 @@ class Artwork < ApplicationRecord
   
   # mount_uploader :photo, PhotosUploader
 
+  scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
+
   belongs_to :admin_user, inverse_of: :artworks
 
   validates :name, presence: true
