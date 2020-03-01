@@ -26,6 +26,6 @@ nl:
         price: Prijs
         created_at: Aangemaakt op
         updated_at: Aangepast op
-        picture: foto
-        pictures: foto's
+        image: Foto
+        images: Foto's
         published: Zichtbaar op website
