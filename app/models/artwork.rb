@@ -2,10 +2,12 @@
 
 class Artwork < ApplicationRecord
   has_many_attached :images
-  
+
   # mount_uploader :photo, PhotosUploader
 
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
+
+  has_many :comments, inverse_of: :artwork
 
   belongs_to :admin_user, inverse_of: :artworks
 
