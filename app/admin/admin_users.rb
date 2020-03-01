@@ -1,4 +1,8 @@
 ActiveAdmin.register AdminUser do
+  ActiveAdmin.setup do |config|
+    config.load_paths = [File.join(Rails.root, "app", "ui")]
+  end
+
   permit_params :email, :password, :password_confirmation
 
   index do
