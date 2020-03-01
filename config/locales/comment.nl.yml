@@ -1,0 +1,15 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        comment:
+          attributes:
+            
+    models:
+      comment:
+        one: Opmerking
+        other: Opmerkingen
+    attributes:
+      comment:
+        body: Inhoud
+        artwork: Kunstwerk
