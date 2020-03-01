@@ -6,5 +6,18 @@ Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  # resources :collections do
+  #   member do
+  #     delete :delete_image_attachment
+  #   end
+  # end
+  
+  resources :artworks, except: [:edit] do
+    member do
+      get 'listing'
+      delete :delete_image_attachment
+    end
+  end
+
   root to: 'pages#home'
 end
