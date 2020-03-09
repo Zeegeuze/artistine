@@ -8,16 +8,11 @@
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-artworks = []
-
-4.times do
-  artwork = Artwork.new(
+artworks = 4.times do
+  Artwork.create!(
     admin_user: AdminUser.first,
     name: Faker::Book.title,
     description: Faker::TvShows::TheITCrowd.quote,
-    price: rand(1500)
+    price: rand(500)
   )
-
-  artwork.save!
-  artworks << artwork
 end
