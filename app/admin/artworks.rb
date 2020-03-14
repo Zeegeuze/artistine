@@ -33,7 +33,11 @@ ActiveAdmin.register Artwork do
 
   index do
     column :id
-    column :name
+    column :name do |artwork|
+      div(style: "width:200px;") do
+        artwork.name
+      end
+    end
     column :published do |artwork|
       if artwork.published
         status_tag "Ja", class: "green"
@@ -43,9 +47,9 @@ ActiveAdmin.register Artwork do
     end
     column "Zichtbaar / onzichtbaar" do |artwork|
       if artwork.published
-        button_to "Maak onzichtbaar", remove_published_admin_artwork_path(artwork.id), method: :patch
+        button_to "Maak onzichtbaar", remove_published_admin_artwork_path(artwork.id), method: :patch, class: "button--red"
       else
-        button_to "Maak zichtbaar", set_as_published_admin_artwork_path(artwork.id), method: :patch
+        button_to "Maak zichtbaar", set_as_published_admin_artwork_path(artwork.id), method: :patch, class: "button--green"
       end
     end
     column :price do |artwork|
@@ -62,7 +66,7 @@ ActiveAdmin.register Artwork do
         panel "Foto's", style: "text-align: center" do
           artwork.images.each do |image|
             span cl_image_tag image.key, height: 200, width: 200, crop: :fill
-            span link_to "Verwijder", delete_category_image_admin_artwork_path(image.id), method: :delete, data: { confirm: 'Are you sure?' }
+            span link_to "<- Verwijder", delete_category_image_admin_artwork_path(image.id), method: :delete, data: { confirm: 'Are you sure?' }
           end
         end
       end
@@ -79,9 +83,9 @@ ActiveAdmin.register Artwork do
             end
             row " " do |artwork|
               if artwork.published
-                  button_to "Maak onzichtbaar", remove_published_admin_artwork_path, method: :patch
+                  button_to "Maak onzichtbaar", remove_published_admin_artwork_path, method: :patch, class: "button--red"
               else
-                  button_to "Maak zichtbaar", set_as_published_admin_artwork_path, method: :patch
+                  button_to "Maak zichtbaar", set_as_published_admin_artwork_path, method: :patch, class: "button--green"
               end
             end
             row :price do |artwork|
@@ -95,33 +99,6 @@ ActiveAdmin.register Artwork do
           end
         end
       end
-
-
-      # panel "Opmerkingen van collega's binnen volgende bibliotheek verbanden: #{current_user.library_associations.map { |l_a| l_a.name }.uniq.join(', ')}" do
-      #   book.book_comments.each do |b_c|
-      #     if b_c.visible_for?(current_user)
-      #       div do
-      #         b_c.comment
-      #       end
-      # 
-      #       div do
-      #         strong do
-      #           b_c.user.name
-      #         end
-      #       end
-      #       br
-      #     else
-      #       "Er zijn nog geen opmerkingen toegevoegd."
-      #     end
-      #   end
-      #   active_admin_form_for [ :bib, book.book_comments.new ] do |f|
-      #     f.inputs do
-      #       f.hidden_field :book_id
-      #       f.input :comment, label: false, input_html: {rows: 4, style: "width: 95%"}
-      #       f.li "Opmerkingen zijn zichtbaar voor iedereen in je bibliotheek of bibliotheekverband."
-      #     end
-      #     f.submit "Plaats opmerking"
-      #   end
     end
   end
 
@@ -137,7 +114,7 @@ ActiveAdmin.register Artwork do
     panel "Huidige foto's" do
       artwork.images.each do |image|
         span cl_image_tag image.key, height: 200, width: 200, crop: :fill
-        span link_to "Verwijder", delete_category_image_admin_artwork_path(image.id), method: :delete, data: { confirm: 'Are you sure?' }
+        span link_to "<- Verwijder", delete_category_image_admin_artwork_path(image.id), method: :delete, data: { confirm: 'Are you sure?' }
       end
     end
     f.actions
