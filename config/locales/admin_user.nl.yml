@@ -1,0 +1,14 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        admin_user:
+          attributes:
+            
+    models:
+      admin_user:
+        one: Beheerder
+        other: Beheerders
+    attributes:
+      admin_user:
+ 

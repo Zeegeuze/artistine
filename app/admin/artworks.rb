@@ -4,6 +4,12 @@ ActiveAdmin.register Artwork do
   permit_params :name, :description, :price, images: []
   config.batch_actions = false
 
+  filter :name
+  filter :description
+  filter :price
+  filter :created_at
+  filter :published
+
   controller do
     def create
       @artwork = current_admin_user.artworks.new(permitted_params[:artwork])
