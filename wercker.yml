@@ -1,8 +1,3 @@
-# This references the default Ruby container from
-# the Docker Hub.
-# https://registry.hub.docker.com/_/ruby/
-# If you want to use a specific version you would use a tag:
-# ruby:2.2.2
 box: ruby
 # You can also use services such as databases. Read more on our dev center:
 # https://devcenter.wercker.com/administration/services/
@@ -21,7 +16,72 @@ build:
     # Read more about steps on our dev center:
     # https://devcenter.wercker.com/development/steps/
     steps:
+        - script:
+          name: server info
+          code: |
+            echo "aantal cores: $(getconf _NPROCESSORS_ONLN)"
+        - script:
+          name: echo ruby information
+          code: |
+              echo "postgres version: $POSTGRES_ENV_PG_MAJOR"
+              echo "ruby version $(ruby --version) running"
+              echo "from location $(which ruby)"
+              echo -p "gem list: $(gem list)"
         - bundle-install
+        - rails-database-yml
+
+        - script:
+            name: db's opzetten
+            code: |
+              export PARALLEL_TEST_FIRST_IS_1=true
+              bundle exec rake db:migrate RAILS_ENV=test
+
         - script:
             name: rspec
             code: bundle exec rspec
+
+
+
+
+
+
+
+# build:
+
+#     steps:
+#         - script:
+#           name: server info
+#           code: |
+#             echo "aantal cores: $(getconf _NPROCESSORS_ONLN)"
+#         - script:
+#             name: echo ruby information
+#             code: |
+#                 echo "postgres version: $POSTGRES_ENV_PG_MAJOR"
+#                 echo "ruby version $(ruby --version) running"
+#                 echo "from location $(which ruby)"
+#                 echo -p "gem list: $(gem list)"
+#         - bundle-install
+
+#         - rails-database-yml
+
+#         - script:
+#             name: db's opzetten
+#             code: |
+#               export PARALLEL_TEST_FIRST_IS_1=true
+#               bundle exec rake db:migrate RAILS_ENV=test
+
+#         - script:
+#             name: rspec
+#             code: bundle exec rspec spec
+
+#     after-steps:
+#         - script:
+#             name: rspec resultaten
+#             code: |
+#                 if [ -f tmp/failing_specs.log ]
+#                 then
+#                   cp  tmp/failing_specs.log $WERCKER_REPORT_ARTIFACTS_DIR
+#                   cat tmp/failing_specs.log
+#                 else
+#                   echo "geen rspec log gevonden"
+#                 fi
