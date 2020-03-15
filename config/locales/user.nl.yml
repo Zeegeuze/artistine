@@ -1,0 +1,14 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            
+    models:
+      user:
+        one: Gebruiker
+        other: Gebruikers
+    attributes:
+      user:
+ 
