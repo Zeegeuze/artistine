@@ -1,4 +1,9 @@
 box: ruby
+services:
+    - id: postgres
+      env:
+        POSTGRES_PASSWORD: ourlittlesecret
+        POSTGRES_USER: myuser
 build:
     steps:
         - script:
