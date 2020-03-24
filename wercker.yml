@@ -13,6 +13,7 @@ build:
               echo "from location $(which ruby)"
               echo -p "gem list: $(gem list)"
         - bundle-install
+
         - rails-database-yml
 
         - script:
