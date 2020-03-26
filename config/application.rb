@@ -12,11 +12,11 @@ module Artistine
     config.load_defaults 6.0
     config.timezone = 'Brussels'
     
-    config.generators do |g|
-      g.test_framework  :rspec, fixture: false
-      g.view_specs      false
-      g.helper_specs    false
-    end
+    # config.generators do |g|
+    #   g.test_framework  :rspec, fixture: false
+    #   g.view_specs      false
+    #   g.helper_specs    false
+    # end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

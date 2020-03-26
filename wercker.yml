@@ -1,4 +1,4 @@
-box: ruby
+box: ruby:2.7.0
 services:
     - id: postgres
       env:
@@ -29,50 +29,4 @@ build:
 
         - script:
             name: rspec
-            code: bundle exec rspec
-
-
-
-
-
-
-
-# build:
-
-#     steps:
-#         - script:
-#           name: server info
-#           code: |
-#             echo "aantal cores: $(getconf _NPROCESSORS_ONLN)"
-#         - script:
-#             name: echo ruby information
-#             code: |
-#                 echo "postgres version: $POSTGRES_ENV_PG_MAJOR"
-#                 echo "ruby version $(ruby --version) running"
-#                 echo "from location $(which ruby)"
-#                 echo -p "gem list: $(gem list)"
-#         - bundle-install
-
-#         - rails-database-yml
-
-#         - script:
-#             name: db's opzetten
-#             code: |
-#               export PARALLEL_TEST_FIRST_IS_1=true
-#               bundle exec rake db:migrate RAILS_ENV=test
-
-#         - script:
-#             name: rspec
-#             code: bundle exec rspec spec
-
-#     after-steps:
-#         - script:
-#             name: rspec resultaten
-#             code: |
-#                 if [ -f tmp/failing_specs.log ]
-#                 then
-#                   cp  tmp/failing_specs.log $WERCKER_REPORT_ARTIFACTS_DIR
-#                   cat tmp/failing_specs.log
-#                 else
-#                   echo "geen rspec log gevonden"
-#                 fi
+            code: bundle exec rspec spec
