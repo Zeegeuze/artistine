@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :comment do
+  factory :remark do
     artwork { Artwork.first || create(:artwork) }
     body { "Vlammende commentaar" }
   end

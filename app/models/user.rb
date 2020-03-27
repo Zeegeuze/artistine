@@ -6,5 +6,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
 
-  has_many :comments, inverse_of: :user
+  has_many :remarks, inverse_of: :user
 end
