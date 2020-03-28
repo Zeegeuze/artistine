@@ -13,3 +13,5 @@ nl:
       remark:
         body: Inhoud
         artwork: Kunstwerk
+        user: Ingelogde gebruiker
+        created_at: Aangemaakt op
