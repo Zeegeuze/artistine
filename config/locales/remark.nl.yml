@@ -2,14 +2,16 @@ nl:
   activerecord:
     errors:
       models:
-        comment:
+        remark:
           attributes:
             
     models:
-      comment:
+      remark:
         one: Opmerking
         other: Opmerkingen
     attributes:
-      comment:
+      remark:
         body: Inhoud
         artwork: Kunstwerk
+        user: Ingelogde gebruiker
+        created_at: Aangemaakt op
