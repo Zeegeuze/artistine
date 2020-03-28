@@ -7,4 +7,6 @@ class AdminUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :artworks, inverse_of: :admin_user
+
+  validates :email, presence: true
 end

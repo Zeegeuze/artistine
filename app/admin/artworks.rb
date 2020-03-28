@@ -63,6 +63,13 @@ ActiveAdmin.register Artwork do
     end
     column :description
     column :created_at
+    column "Opmerkingen" do |artwork|
+      if artwork.remarks.exists?
+        link_to "Bekijk", admin_remarks_url(q: { artwork_id_equals: artwork.id })
+      else
+        "-"
+      end
+    end
     actions
   end
   
