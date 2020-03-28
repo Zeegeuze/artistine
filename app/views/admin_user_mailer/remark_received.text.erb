@@ -1,0 +1,10 @@
+Beste beheerder
+
+Er is een nieuwe opmerking toegevoegd voor kunstwerk <%= @artwork.name %>:
+
+<%= @remark.body%>
+
+Bekijk het online via <%= link_to "deze link", admin_remarks_url(q: { artwork_id_equals: @artwork.id })%>
+
+Met vriendelijke groeten
+Art'Istine
