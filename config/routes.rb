@@ -9,4 +9,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root to: 'pages#home'
+
+  namespace :admin do
+    resources :remarks, only: [:index, :show, :destroy] do
+      resources :answer_remarks
+    end
+  end
+
 end
