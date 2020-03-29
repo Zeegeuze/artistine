@@ -7,6 +7,7 @@ class AdminUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :artworks, inverse_of: :admin_user
+  has_many :answer_remarks, inverse_of: :admin_user,  dependent: :destroy
 
   validates :email, presence: true
 end
