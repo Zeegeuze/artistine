@@ -47,4 +47,37 @@ feature "remark" do
       end    
     end
   end
+
+  describe "answer_remarks" do
+    let(:artwork) { create(:artwork, name: "Super skoon kunstwerkje") }
+    let!(:remark) { create(:remark, body: "Simpelweg adembenemend", artwork: artwork) }
+
+    before do
+      sign_in admin_user
+      click_link "Opmerkingen"
+    end
+
+    it "should show possibility to answer" do
+      expect(page).to have_content "Antwoord"
+    end
+
+    it "registers answer" do
+      fill_in "answer_remark_body", with: "Lief Antwoord"
+      click_button "Antwoord"
+
+      expect(page).to have_content "Lief Antwoord"
+      expect(AnswerRemark.count).to be 1
+    end
+
+    it "allows to delete an answer" do
+      create(:answer_remark, remark: remark, body: "Schoon Antwoord")
+      click_link "Opmerkingen"
+
+      within ".answer_remarks_artwork_#{artwork.id}" do
+        click_link "Verwijder"
+
+        expect(page).not_to have_content "Schoon Antwoord"
+      end
+    end
+  end
 end
