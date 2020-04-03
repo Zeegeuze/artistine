@@ -33,7 +33,7 @@ ActiveAdmin.register Remark do
                   br
                   span link_to "Verwijder", admin_remark_path(remark.id), method: :delete, data: { confirm: "Weet je het zeker?" }
 
-                  panel "Antwoord" do
+                  panel "Antwoord", class: "answer_remarks_artwork_#{artwork.id}" do
                     if remark.answer_remarks.exists?
                       remark.answer_remarks.each do |a_r|
                         div do
@@ -45,10 +45,12 @@ ActiveAdmin.register Remark do
                     end
 
                     active_admin_form_for [ :admin, remark, remark.answer_remarks.new ] do |f|
-                      f.hidden_field :remark_id
-                      f.input :body, label: false, input_html: {rows: 4, style: "width: 100%"}
-                      br
-                      f.submit "Antwoord"
+                      div(style: "list-style: none") do
+                        f.hidden_field :remark_id
+                        f.input :body, as: :text, label: false, input_html: {rows: 4, style: "width: 100%"}
+                        br
+                        f.submit "Antwoord"
+                      end
                     end
                   end
                 end
