@@ -161,7 +161,11 @@ ActiveAdmin.register Artwork do
       f.input :price
       f.input :description
       f.input :images, as: :file, input_html: { multiple: true }
-      f.input :keywords
+
+      hint = "Gekozen categorieën worden toegevoegd en zijn geen vervanging van de bestaande categorieën. " unless resource.id.nil?
+      info = "Er kunnen meerdere categorieën geselecteerd worden door de control-toets ingedrukt te houden."
+      hint_info = hint.nil? ? info : hint + info
+      f.input :keywords, hint: hint_info
     end
 
     panel "Huidige foto's" do

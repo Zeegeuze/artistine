@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Keyword do
-  permit_params :name
+  permit_params :name, :publish_on_homepage
 
   controller do
     def create
@@ -23,12 +23,41 @@ ActiveAdmin.register Keyword do
         @keyword.artworks = @keyword.artworks.uniq
       end
 
-      @keyword.save!
-      redirect_to admin_keywords_path, notice: "#{@keyword.name} werd correct gewijzigd."
+      update!(notice: "Categorie '#{@keyword.name}' werd correct gewijzigd.") do
+        admin_keywords_path
+      end
     end
   end
 
+  index do
+    selectable_column
+
+    column :name
+    column :publish_on_homepage do |keyword|
+      if keyword.publish_on_homepage
+        status_tag "Ja", class: "green"
+      else
+        status_tag "Nee", class: "red"
+      end
+    end
+    actions
+  end
+
   show do
+    panel "Eigenschappen" do
+      attributes_table_for keyword do
+        row :publish_on_homepage do |keyword|
+          if keyword.publish_on_homepage
+            status_tag "Ja", class: "green"
+          else
+            status_tag "Nee", class: "red"
+          end
+        end
+        row :created_at
+        row :updated_at
+      end
+    end
+
     panel "Gebruikt voor volgende kunstwerken" do
       if resource.artworks.empty?
         "Er zijn nog geen kustwerken gelinkt aan deze categorie."
@@ -67,6 +96,7 @@ ActiveAdmin.register Keyword do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :publish_on_homepage
 
       hint = "Gekozen kunstwerken worden toegevoegd en zijn geen vervanging van de bestaande kunstwerken. " unless resource.id.nil?
       info = "Er kunnen meerdere kunstwerken geselecteerd worden door de control-toets ingedrukt te houden."
