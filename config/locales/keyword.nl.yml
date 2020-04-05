@@ -1,0 +1,18 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        keyword:
+          attributes:
+
+    models:
+      keyword:
+        one: Categorie
+        other: Categorieën
+    attributes:
+      keyword:
+        name: Naam
+        created_at: Aangemaakt op
+        updated_at: Gewijzigd op
+        artwork: Kunstwerk
+        artworks: Kunstwerken
