@@ -6,6 +6,8 @@ class Artwork < ApplicationRecord
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
 
   has_many :remarks, inverse_of: :artwork
+  has_many :artwork_keywords, inverse_of: :artwork, dependent: :destroy
+  has_many :keywords, through: :artwork_keywords
 
   belongs_to :admin_user, inverse_of: :artworks
 

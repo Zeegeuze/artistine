@@ -50,4 +50,25 @@ describe Artwork do
       end
     end
   end
+
+  describe "actions" do
+    describe "deleting" do
+      let(:artwork) { create(:artwork) }
+      let(:keyword) { create(:keyword) }
+      let!(:artwork_keyword) { create(:artwork_keyword, artwork: artwork, keyword: keyword) }
+
+      before do
+        artwork.destroy!
+      end
+
+      it "won't delete the keyword" do
+        expect(Artwork.count).to be_zero
+        expect(Keyword.count).to be 1
+      end
+
+      it "deletes the artwork_keyword" do
+        expect(ArtworkKeyword.count).to be_zero
+      end
+    end
+  end
 end
