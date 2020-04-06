@@ -1,3 +1,35 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#tabs {
+  position: relative; 
+}
+
+.navbar-nav {
+  text-decoration: none !important;
+}
+
+.navbar-nav:hover{
+  text-decoration: none !important;
+}
+
+.navbar-nav:first-child {
+}
+
+.nav-link {
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-link:hover{
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#footer{
+  font-size: 14px;
+  
+}
