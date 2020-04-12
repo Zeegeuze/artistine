@@ -157,10 +157,10 @@ ActiveAdmin.register Artwork do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :published, as: :select, collection: [[:ja, true], [:nee, false]]
+      f.input :published, as: :select, collection: [[:ja, true], [:nee, false]], include_blank: false
       f.input :price
       f.input :description
-      f.input :images, as: :file, input_html: { multiple: true }
+      f.input :images, as: :file, input_html: { multiple: true }, hint: "Er kunnen meerdere foto's geselecteerd worden door de control-toets ingedrukt te houden"
 
       hint = "Gekozen categorieën worden toegevoegd en zijn geen vervanging van de bestaande categorieën. " unless resource.id.nil?
       info = "Er kunnen meerdere categorieën geselecteerd worden door de control-toets ingedrukt te houden."

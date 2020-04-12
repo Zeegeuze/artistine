@@ -14,8 +14,6 @@
   text-decoration: none !important;
 }
 
-.navbar-nav:first-child {
-}
 
 .nav-link {
   text-decoration: none !important;
@@ -30,6 +28,29 @@
 }
 
 #footer{
-  font-size: 14px;
-  
+  font-size: 14px; 
+}
+
+.card{
+  height: 100%;
+  margin-bottom: 12px;
+}
+
+.card-group{
+  margin-bottom: 100px !important;
+}
+
+.card-body{
+  position: relative
+}
+
+.card-footer{
+  height: 10%;
+}
+
+.test{
+  position: absolute;
+  right: 16px;
+  top: 20px;
+  width: 70px;
 }

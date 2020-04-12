@@ -14,6 +14,9 @@ class Artwork < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
+  scope :published, -> { where(published: true) }
+
+
   # def price(num)
   #   @view.number_to_currency(num)
   # end
