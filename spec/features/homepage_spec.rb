@@ -27,7 +27,7 @@ feature "homepage" do
       end
 
       it "only shows published artworks if categorie is published" do
-        create(:artwork, name: "Niet gepubliceerd")
+        create(:artwork, name: "Niet gepubliceerd", keywords: [keyword])
         
         visit "/"
         
