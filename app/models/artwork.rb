@@ -11,6 +11,7 @@ class Artwork < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
+  # validates :pictures, presence: true if published?
 
   scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
 

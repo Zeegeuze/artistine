@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: :about
   get 'contact', to: 'pages#contact', as: :contact
   get 'artwork', to: 'pages#artwork', as: :artwork
+  get 'artwork_details/:id', to: 'pages#artwork_show', as: :artwork_id
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, ActiveAdmin::Devise.config
@@ -16,5 +17,4 @@ Rails.application.routes.draw do
       resources :answer_remarks
     end
   end
-
 end

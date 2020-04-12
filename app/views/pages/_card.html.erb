@@ -3,7 +3,7 @@
     <%=(cl_image_tag artwork.images.first.key, height: 250, class: "card-image-top.border-bottom") if artwork.images.exists?%>
 
     <div class="card-body">
-      <h5 class="card-title"><%=artwork.name%></h5>
+      <h5 class="card-title"><%=link_to artwork.name, artwork_id_path(artwork.id)%></h5>
       <h3 class="test"><%=number_to_currency(artwork.price)%></h3>
       <p class="card-text"><%=artwork.description%></p>
     </div>
