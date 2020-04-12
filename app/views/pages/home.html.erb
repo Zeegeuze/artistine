@@ -7,12 +7,14 @@
 <div>
   <%Keyword.visible_on_homepage.all.each do |keyword|%>
     <div>
-      <h3 class="keyword-group" ><%=keyword.name%></h3>
+      <%if keyword.artworks.present?%>
+        <h3 class="keyword-group" ><%=keyword.name%></h3>
+      <%end%>
     </div>
     <div class="card-group">
       <%keyword.artworks.published.each do |artwork|%>
         <%=render partial: "pages/card", locals: { artwork: artwork } %>
-      <%end %>
+      <%end%>
     </div>
   <%end%>
 </div>
