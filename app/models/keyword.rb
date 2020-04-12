@@ -5,4 +5,6 @@ class Keyword < ApplicationRecord
   has_many :artworks, through: :artwork_keywords
 
   validates :name, presence: true
+
+  scope :visible_on_homepage, -> { where(publish_on_homepage: true) }
 end

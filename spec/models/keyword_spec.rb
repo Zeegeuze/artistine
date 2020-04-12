@@ -9,10 +9,22 @@ RSpec.describe Keyword, type: :model do
     it "has a name" do
       expect(build(:keyword, name: nil)).to have(1).error_on(:name)
     end
+
+    it "is not standard published on homepage" do
+      keyword = create(:keyword)
+      expect(keyword.publish_on_homepage).to be_falsey
+    end
   end
 
   describe "scopes" do
-    
+    describe "visible_on_homepage" do
+      it "only shows published keywords" do
+        not_published_keyword = create(:keyword, name: "Niet gepbliceerd")
+        published_keyword = create(:keyword, name: "Wel gepbliceerd", publish_on_homepage: true)
+
+        expect(Keyword.visible_on_homepage).to contain_exactly(published_keyword)
+      end
+    end
   end
 
   describe "instance methods" do
