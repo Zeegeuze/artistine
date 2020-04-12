@@ -22,7 +22,14 @@ describe Artwork do
   end
 
   describe "scopes" do
-    
+    describe "published" do
+      it "selects the published artworks only" do
+        published_artwork = create(:artwork, published: true)
+        unpublished_artwork = create(:artwork)
+
+        expect(Artwork.published).to contain_exactly(published_artwork)
+      end
+    end
   end
 
   describe "instance methods" do
