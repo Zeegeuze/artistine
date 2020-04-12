@@ -3,20 +3,16 @@
 require "rails_helper"
 
 feature "user artwork" do
-  let(:artwork) { create(:artwork, published: true) }
-
-  before do
-    visit "/"
-    click_link "Alle kunstwerken"
-  end
+  let!(:artwork) { create(:artwork, published: true, name: "Wel gepubliceerd") }
 
   describe "index page artwork" do
     describe "artwork" do
       it "only shows published artworks" do
         unpublished_artwork = create(:artwork, name: "Niet gepubliceerd")
-
-        click_link "Alle kunstwerken"
         
+        visit "/artwork"
+        
+        expect(page).to have_content ("Wel gepubliceerd")
         expect(page).not_to have_content ("Niet gepubliceerd")
       end
     end
