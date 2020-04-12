@@ -1,1 +1,20 @@
-<div class="banner" style="background-image: url('https://res.cloudinary.com/dasvskzqd/image/upload/v1586705771/Banner_nl.png');">
+<div>
+  <div class="banner" style="background-image: url('https://res.cloudinary.com/dasvskzqd/image/upload/v1586705771/Banner_nl.png');">
+</div>
+<div class="welcome-text">
+  <h2>Welkom: kijk gerust eens rond en aarzel niet me te <%=link_to "contacteren", contact_path%> voor verdere vragen</h1>
+</div>
+<div>
+  <%Keyword.visible_on_homepage.all.each do |keyword|%>
+    <div>
+      <%if keyword.artworks.present?%>
+        <h3 class="keyword-group" ><%=keyword.name%></h3>
+      <%end%>
+    </div>
+    <div class="card-group">
+      <%keyword.artworks.published.each do |artwork|%>
+        <%=render partial: "pages/card", locals: { artwork: artwork } %>
+      <%end%>
+    </div>
+  <%end%>
+</div>
