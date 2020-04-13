@@ -3,8 +3,6 @@
 class Artwork < ApplicationRecord
   has_many_attached :images
 
-  scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
-
   has_many :remarks, inverse_of: :artwork
   has_many :artwork_keywords, inverse_of: :artwork, dependent: :destroy
   has_many :keywords, through: :artwork_keywords
@@ -13,6 +11,13 @@ class Artwork < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
+
+  scope :with_eager_loaded_images, -> { eager_load(images_attachments: :blob) }
+
+  scope :with_keyword, ->(keyword_id) { includes(:artwork_keywords)
+                                        .where(artwork_keywords: { keyword_id: keyword_id })
+                                        .distinct
+  }
 
   scope :published, -> { where(published: true) }
 

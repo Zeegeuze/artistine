@@ -34,6 +34,20 @@ feature "homepage" do
         expect(page).to have_content ("Wel gepubliceerd")
         expect(page).not_to have_content ("Niet gepubliceerd")
       end
+
+      it "has the correct link to artwork show page" do
+        keyword = create(:keyword, name: "Schilderkunst")
+        artwork.update! keywords: [keyword]
+        other_keyword = create(:keyword, name: "Moderne kunst")
+        other_artwork = create(:artwork, keywords: [other_keyword])
+
+        visit "/artwork"
+        click_link keyword.name
+
+        expect(page).to have_content "Blader door mijn werken"
+        expect(page).to have_content "Schilderkunst"
+        expect(page).not_to have_content "Moderne kunst"
+      end
     end
   end
 end
