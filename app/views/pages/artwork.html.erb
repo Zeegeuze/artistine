@@ -1,7 +1,24 @@
 <h1>Blader door mijn werken</h1>
 
+  <%search = params[:kw].nil? ? Artwork : Artwork.with_keyword(params[:kw])%>
+
+  <%if params[:kw].present?%>
+    <div>
+      <% if (Keyword.where id: params[:kw]).present? %>
+        <%@keyword = Keyword.find params[:kw]%>
+        
+        <div class="category-description">
+          <h2>Categorie: '<%=@keyword.name%>'</h2>
+          <h4><%=@keyword.extra_info%></h4>
+        </div>
+      <% else %>
+        <%search = Artwork %>
+      <%end%>
+    </div>
+  <%end%>
+
 <div class="card-group">
-  <%Artwork.published.each do |artwork|%>
+  <%search.published.each do |artwork|%>
     <%=render partial: "pages/card", locals: { artwork: artwork }%>
   <%end%>
 </div>

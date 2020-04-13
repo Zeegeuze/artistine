@@ -30,6 +30,18 @@ describe Artwork do
         expect(Artwork.published).to contain_exactly(published_artwork)
       end
     end
+
+    describe "with_keyword" do
+      it "selects all articles with specific keyword" do
+        keyword_1 = create(:keyword, name: "Eerste")
+        keyword_2 = create(:keyword, name: "Tweede")
+        artwork_with_first_keyword = create(:artwork, keywords: [keyword_1])
+        artwork_with_second_keyword = create(:artwork, keywords: [keyword_2])
+        artwork_with_first_and_second_keyword = create(:artwork, keywords: [keyword_1, keyword_2])
+
+        expect(Artwork.with_keyword(keyword_1)).to contain_exactly(artwork_with_first_keyword, artwork_with_first_and_second_keyword)
+      end
+    end
   end
 
   describe "instance methods" do

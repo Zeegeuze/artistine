@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Keyword do
-  permit_params :name, :publish_on_homepage
+  permit_params :name, :publish_on_homepage, :extra_info
 
   controller do
     def create
@@ -55,6 +55,7 @@ ActiveAdmin.register Keyword do
         end
         row :created_at
         row :updated_at
+        row :extra_info
       end
     end
 
@@ -96,6 +97,7 @@ ActiveAdmin.register Keyword do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :extra_info, input_html: {rows: 4}
       f.input :publish_on_homepage
 
       hint = "Gekozen kunstwerken worden toegevoegd en zijn geen vervanging van de bestaande kunstwerken. " unless resource.id.nil?
