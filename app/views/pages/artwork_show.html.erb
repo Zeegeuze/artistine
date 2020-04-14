@@ -3,11 +3,89 @@
 
     <h1><%=@artwork.name%></h1>
 
+    <div class="slideshow-container">
+      <% @artwork.images.each do |image| %>
+        <%= cl_image_tag image.key, class: "mySlides", height: 400 %>
+      <% end %>
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusSlides(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length} ;
+          for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";
+          }
+          x[slideIndex-1].style.display = "block";
+        }
+      </script>
+
+    </div>
+
+    <div class="row">
+      <div class="col info-section">
+        <div class= "col">
+          <h3> Prijs </h3>
+          <p class= "marg_l_8"> <%= number_to_currency(@artwork.price) %> </p>
+          <h3> Beschrijving </h3>
+          <p class= "marg_l_8"> <%= @artwork.description %> </p>
+          <h3> Categorieën </h3>
+          <p class= "marg_l_8"> <%= @artwork.keywords.map{|n| link_to n.name, artwork_path(kw: n.id)}.join(', ').html_safe %> </p>
+        </div>
+      </div>
+      <div class="col remark-section">
+        <% if @artwork.remarks.exists?%>
+          <h3> Wat vonden anderen hiervan? </h3>
+          <% @artwork.remarks.each do |remark| %>
+            <div class="single-remark">
+              <div class= "remark-body">
+                <p><%= remark.body %></p>
+              </div>
+              <div class= "created_at">
+                <%= remark.created_at.to_date %>
+              </div>
+              <% if remark.answer_remarks.exists? %>
+                <p class= "answer-admin">Antwoord van admin:</p>
+                <%remark.answer_remarks.each do |a_r|%>
+                  <div class= "answer-remark">
+                    <div class= "remark-body">
+                      <p><%= a_r.body%></p>
+                    </div>
+                    <div class= "created_at">
+                      <%= a_r.created_at.to_date%>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <div class= "comment-field">
+          <%= simple_form_for [@artwork.remarks.new] do |f| %>
+              <%= f.hidden_field :artwork_id, value: @artwork.id %> 
+              <%= f.input :body, label: false, as: :text %>
+              <%= f.button :submit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
 
-<%else%>
+<% else %>
   <div>
     <h1>Error</h1>
     <h3> De gevraagde pagina kon niet gevonden worden<h3>
   </div>
-<%end%>
+<% end %>
