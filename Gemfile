@@ -36,6 +36,11 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'font-awesome-rails'
 gem "actionview", ">= 6.0.2.2"
+gem 'simple_form'
+
+gem "jquery-rails"
+gem "jquery-ui-rails"
+gem "rails-ujs"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

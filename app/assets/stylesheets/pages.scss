@@ -84,3 +84,75 @@
   border: 1px solid #F4BE46;
   padding: 20px;
 }
+
+.answer-remark{
+  margin-left: 36px;
+}
+
+.answer-admin{
+  border-top: 1px solid rgb(91, 178, 162);
+  padding-top: 8px;
+  margin-left: 18px;
+  font-weight: bold;
+}
+
+.created_at{
+  margin-bottom: 16px;
+}
+
+.comment-field{
+  margin-top: 16px;
+  margin-bottom: 100px !important;
+}
+
+.single-remark{
+  border: 1px solid rgb(91, 178, 162);
+  padding: 16px;
+  margin: 2px;
+}
+
+.marg_l_8{
+  margin-left: 8px;
+}
+
+// body {margin:0}
+.mySlides {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #f4be46;
+  border-radius: 4px;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+}
+
+.prev {
+  left: 0;
+}
