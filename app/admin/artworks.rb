@@ -21,7 +21,9 @@ ActiveAdmin.register Artwork do
 
     def update
       @artwork = Artwork.find(params[:id])
-      @artwork.images.attach(params[:artwork][:images])
+      unless params[:artwork][:images].nil?
+        @artwork.images.attach(params[:artwork][:images])
+      end
       if params[:artwork][:keyword_ids].present?
         keyword_ids = params[:artwork][:keyword_ids]
         keyword_ids.each do |keyword_id|
