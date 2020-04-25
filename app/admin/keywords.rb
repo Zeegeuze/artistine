@@ -74,7 +74,9 @@ ActiveAdmin.register Keyword do
               end
             end
           end
-          column :price
+          column :standard_price do |artwork|
+            number_to_currency(artwork.standard_price)
+          end
             
           column "Links" do |artwork|
             @artwork_keyword = ArtworkKeyword.where(artwork: artwork, keyword: resource).first
@@ -121,8 +123,9 @@ ActiveAdmin.register Keyword do
                   end
                 end
               end
-              column :price
-                
+              column :standard_price do |artwork|
+                number_to_currency(artwork.standard_price)
+              end                
               column "Links" do |artwork|
                 @artwork_keyword = ArtworkKeyword.where(artwork: artwork, keyword: resource).first
                 

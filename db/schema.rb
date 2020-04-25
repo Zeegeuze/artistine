@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_082656) do
+ActiveRecord::Schema.define(version: 2020_04_25_093128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,12 +84,30 @@ ActiveRecord::Schema.define(version: 2020_04_13_082656) do
   create_table "artworks", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.decimal "price"
+    t.decimal "standard_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "admin_user_id"
     t.boolean "published", default: false, null: false
+    t.string "standard_color"
+    t.string "standard_material"
+    t.decimal "standard_size"
+    t.integer "standard_sold_per", default: 1
     t.index ["admin_user_id"], name: "index_artworks_on_admin_user_id"
+  end
+
+  create_table "feature_sets", force: :cascade do |t|
+    t.bigint "artwork_id"
+    t.string "color"
+    t.string "material"
+    t.integer "pieces_available", default: 1
+    t.decimal "price"
+    t.integer "sold_per"
+    t.decimal "size"
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artwork_id"], name: "index_feature_sets_on_artwork_id"
   end
 
   create_table "keywords", force: :cascade do |t|

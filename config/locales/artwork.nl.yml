@@ -23,7 +23,7 @@ nl:
       artwork:
         name: Naam
         description: Beschrijving
-        price: Prijs
+        standard_price: Prijs
         created_at: Aangemaakt op
         updated_at: Aangepast op
         image: Foto
@@ -31,3 +31,10 @@ nl:
         published: Zichtbaar op website
         keyword: Categorie
         keywords: Categorieën
+        feature_sets: Kenmerken set
+        standard_color: Standaard kleur
+        standard_sold_per: Standaard verkocht per
+        standard_size: Standaard grootte
+        standard_material: Standaard materiaal
+        standard_price: Standaard prijs
+        total_amount: Totaal beschikbaar

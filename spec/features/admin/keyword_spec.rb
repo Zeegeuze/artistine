@@ -4,10 +4,10 @@ require "rails_helper"
 
 feature "keyword" do
   let!(:admin_user) { create(:admin_user) }
-  let(:artwork) { create(:artwork, name: "Super kunstwerk", price: 133345) }
+  let(:artwork) { create(:artwork, name: "Super kunstwerk", standard_price: 133345) }
   let(:keyword) { create(:keyword) }
   let!(:artwork_keyword) { create(:artwork_keyword, artwork: artwork, keyword: keyword) }
-  let!(:artwork2) { create(:artwork, name: "Von Gagh imitatie", price: 999978) }
+  let!(:artwork2) { create(:artwork, name: "Von Gagh imitatie", standard_price: 999978) }
 
   before do
     sign_in admin_user
@@ -25,8 +25,8 @@ feature "keyword" do
       end
 
       it "shows all artworks" do
-        expect(page).to have_content 133345
-        expect(page).to have_content 999978
+        expect(page).to have_content "€ 133.345,00"
+        expect(page).to have_content "€ 999.978,00"
       end
 
       it "allows to delete an artwork" do
@@ -52,7 +52,7 @@ feature "keyword" do
 
     describe "artworks" do
       it "shows the artworks connected already" do
-        expect(page).to have_content 133345
+        expect(page).to have_content "€ 133.345,00"
       end
 
       it "adds the artwork" do

@@ -4,7 +4,7 @@
 
     <div class="card-body">
       <h5 class="card-title"><%=link_to artwork.name, artwork_id_path(artwork.id)%></h5>
-      <h3 class="test"><%=number_to_currency(artwork.price)%></h3>
+      <h3 class="test"><%=number_to_currency(artwork.standard_price)%></h3>
       <p class="card-text"><%=artwork.description%></p>
     </div>
     <div class="card-footer">

@@ -10,7 +10,7 @@ feature "artwork" do
       let!(:artwork) { create(:artwork) }
     
       it "will follow happy path if category available" do
-        artwork.update! price: 5
+        artwork.update! standard_price: 5
 
         sign_in admin_user
         click_link "Kunstwerken"
