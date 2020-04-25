@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FeatureSet, type: :model do
-  require 'rails_helper'
-
   describe "validations" do
     it "is valid" do
       expect(build(:feature_set)).to be_valid

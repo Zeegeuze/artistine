@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe Artwork do
+RSpec.describe Artwork, type: :model do
   describe "validations" do
     it "is valid" do
       expect(create(:artwork)).to be_valid
