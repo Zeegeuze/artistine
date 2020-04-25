@@ -192,8 +192,8 @@ end
             column :sold_per
             column :size
             column :material
-            column :price do |artwork|
-              number_to_currency(artwork.price)
+            column :price do |feature_set|
+              number_to_currency(feature_set.price)
             end
             column :pieces_available do |feature_set|
               feature_set.pieces_available == 0 ? "Uitverkocht" : feature_set.pieces_available
