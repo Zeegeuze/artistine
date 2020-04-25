@@ -5,6 +5,7 @@ class Artwork < ApplicationRecord
 
   has_many :remarks, inverse_of: :artwork
   has_many :artwork_keywords, inverse_of: :artwork, dependent: :destroy
+  has_many :feature_sets, dependent: :destroy, inverse_of: :artwork
   has_many :keywords, through: :artwork_keywords
 
   belongs_to :admin_user, inverse_of: :artworks
@@ -33,5 +34,9 @@ class Artwork < ApplicationRecord
 
   def remove_published!
     self.update published: false
+  end
+
+  def total_amount
+    self.feature_sets.exists? ? self.feature_sets.map{ |f_s| f_s.pieces_available }.sum : 1
   end
 end

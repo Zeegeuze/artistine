@@ -1,0 +1,23 @@
+nl:
+  activerecord:
+    errors:
+      models:
+        feature_set:
+          attributes:
+
+    models:
+      feature_set:
+        one: Kenmerken set
+        other: Kenmerken sets
+    attributes:
+      feature_set:
+        color: Kleur
+        created_at: Aangemaakt op
+        updated_at: Gewijzigd op
+        sold_per: Verkocht per
+        size: Grootte
+        artwork: Kunstwerk
+        material: Materiaal
+        price: prijs
+        pieces_available: Stuks beschikbaar
+        active: Actief

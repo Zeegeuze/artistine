@@ -68,6 +68,26 @@ describe Artwork do
         end
       end
     end
+
+    describe "total_amount" do
+      let!(:artwork) { create(:artwork) }
+      it "returns 1 if no feature_sets" do
+        expect(artwork.total_amount).to be 1
+      end
+
+      it "returns 0 is sum pieces_available is 0" do
+        feature_set = create(:feature_set, artwork: artwork, pieces_available: 0)
+
+        expect(artwork.total_amount).to be 0
+      end
+
+      it "returns correct amount if various feature_sets" do
+        feature_set = create(:feature_set, artwork: artwork, pieces_available: 3)
+        feature_set2 = create(:feature_set, artwork: artwork, pieces_available: 4)
+
+        expect(artwork.total_amount).to be 7
+      end
+    end
   end
 
   describe "actions" do
