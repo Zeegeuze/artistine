@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_093128) do
+ActiveRecord::Schema.define(version: 2020_04_26_164639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,40 @@ ActiveRecord::Schema.define(version: 2020_04_25_093128) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "publish_on_homepage", default: false, null: false
     t.text "extra_info"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "artwork_id", null: false
+    t.integer "order_id", null: false
+    t.integer "qty", default: 1, null: false
+    t.decimal "price", precision: 20, scale: 10
+    t.integer "color"
+    t.string "material"
+    t.decimal "size"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "permalink"
+    t.string "first_name"
+    t.string "last_name"
+    t.text "extra_info"
+    t.string "city"
+    t.decimal "zip_code"
+    t.decimal "house_number"
+    t.string "address_addition"
+    t.string "street"
+    t.datetime "ordered_at"
+    t.string "order_state", default: "0"
+    t.string "payment_reference"
+    t.datetime "debt_changed_at"
+    t.string "email"
+    t.string "received_last_payment_reminder_at"
+    t.decimal "total_received_payment_reminders", default: "0.0"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["permalink"], name: "index_orders_on_permalink", unique: true
   end
 
   create_table "remarks", force: :cascade do |t|

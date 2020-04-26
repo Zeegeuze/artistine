@@ -7,6 +7,7 @@ class Artwork < ApplicationRecord
   has_many :artwork_keywords, inverse_of: :artwork, dependent: :destroy
   has_many :feature_sets, dependent: :destroy, inverse_of: :artwork
   has_many :keywords, through: :artwork_keywords
+  has_many :order_items, inverse_of: :artwork
 
   belongs_to :admin_user, inverse_of: :artworks
 
