@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_082509) do
+ActiveRecord::Schema.define(version: 2020_04_26_164639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,18 @@ ActiveRecord::Schema.define(version: 2020_04_26_082509) do
     t.text "extra_info"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "artwork_id", null: false
+    t.integer "order_id", null: false
+    t.integer "qty", default: 1, null: false
+    t.decimal "price", precision: 20, scale: 10
+    t.integer "color"
+    t.string "material"
+    t.decimal "size"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "permalink"
     t.string "first_name"
@@ -137,6 +149,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_082509) do
     t.decimal "total_received_payment_reminders", default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["permalink"], name: "index_orders_on_permalink", unique: true
   end
 
   create_table "remarks", force: :cascade do |t|

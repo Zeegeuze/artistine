@@ -9,6 +9,5 @@ FactoryBot.define do
     house_number { 15 }
     street { "Hierstraat" }
     email { "order@example.com" }
-    payment_reference { "+++082/9002/35503+++" }
   end
 end
