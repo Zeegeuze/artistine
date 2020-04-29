@@ -31,7 +31,6 @@
           x[slideIndex-1].style.display = "block";
         }
       </script>
-
     </div>
 
     <div class="row">
@@ -45,39 +44,47 @@
           <p class= "marg_l_8"> <%= @artwork.keywords.map{|n| link_to n.name, artwork_path(kw: n.id)}.join(', ').html_safe %> </p>
         </div>
       </div>
-      <div class="col remark-section">
-        <% if @artwork.remarks.exists?%>
-          <h3> Wat vonden anderen hiervan? </h3>
-          <% @artwork.remarks.each do |remark| %>
-            <div class="single-remark">
-              <div class= "remark-body">
-                <p><%= remark.body %></p>
-              </div>
-              <div class= "created_at">
-                <%= remark.created_at.to_date %>
-              </div>
-              <% if remark.answer_remarks.exists? %>
-                <p class= "answer-admin">Antwoord van admin:</p>
-                <%remark.answer_remarks.each do |a_r|%>
-                  <div class= "answer-remark">
-                    <div class= "remark-body">
-                      <p><%= a_r.body%></p>
-                    </div>
-                    <div class= "created_at">
-                      <%= a_r.created_at.to_date%>
-                    </div>
-                  <% end %>
+      <div class="col">
+        <%=render partial: "pages/add_to_cart", locals: { artwork: @artwork }%>
+
+        <hr style="background-color: rgb(213, 97, 74)">
+
+
+        <h2> Wat vonden anderen? </h2>
+        <div class="remark-section">
+          <% if @artwork.remarks.exists?%>
+            <h3> Wat vonden anderen hiervan? </h3>
+            <% @artwork.remarks.each do |remark| %>
+              <div class="single-remark">
+                <div class= "remark-body">
+                  <p><%= remark.body %></p>
                 </div>
-              <% end %>
-            </div>
+                <div class= "created_at">
+                  <%= remark.created_at.to_date %>
+                </div>
+                <% if remark.answer_remarks.exists? %>
+                  <p class= "answer-admin">Antwoord van admin:</p>
+                  <%remark.answer_remarks.each do |a_r|%>
+                    <div class= "answer-remark">
+                      <div class= "remark-body">
+                        <p><%= a_r.body%></p>
+                      </div>
+                      <div class= "created_at">
+                        <%= a_r.created_at.to_date%>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-        <div class= "comment-field">
-          <%= simple_form_for [@artwork.remarks.new] do |f| %>
-              <%= f.hidden_field :artwork_id, value: @artwork.id %> 
-              <%= f.input :body, label: false, as: :text %>
-              <%= f.button :submit %>
-          <% end %>
+          <div class= "comment-field">
+            <%= simple_form_for [@artwork.remarks.new] do |f| %>
+                <%= f.hidden_field :artwork_id, value: @artwork.id %> 
+                <%= f.input :body, label: false, as: :text %>
+                <%= f.button :submit %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,45 @@
+<h2> Interesse? </h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <% unless @artwork.feature_sets.reject{|f_s| f_s.size.nil?}.empty? %>
+        <th scope="col">Maat</th>
+      <% end %>
+ 
+      <% unless @artwork.feature_sets.reject{|f_s| f_s.color.nil?}.empty? %>
+        <th scope="col">Kleur</th>
+      <% end %>
+
+      <% unless @artwork.feature_sets.reject{|f_s| f_s.material.nil?}.empty? %>
+        <th scope="col">materiaal</th>
+      <% end %>
+
+      <th scope="col">Verkocht per</th>
+      <th scope="col">Prijs</th>
+      <th scope="col">Voeg toe</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @artwork.feature_sets.each do |f_s| %>
+      <tr>
+        <% unless @artwork.feature_sets.reject{|f_s| f_s.size.nil?}.empty? %>
+          <td><%=f_s.size%></td>
+        <% end %>
+
+        <% unless @artwork.feature_sets.reject{|f_s| f_s.color.nil?}.empty? %>
+          <td><%=f_s.color%></td>
+        <% end %>
+
+        <% unless @artwork.feature_sets.reject{|f_s| f_s.material.nil?}.empty? %>
+          <td><%=f_s.material%></td>
+        <% end %>
+
+        <td><%=f_s.sold_per%></td>
+        <td><%=f_s.price%></td>
+        <td><%=link_to "Koop"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
