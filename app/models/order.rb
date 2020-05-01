@@ -3,23 +3,29 @@
 require "validators/email_validator"
 
 class Order < ApplicationRecord
+  enum state: %i[draft ordered info_needed artwork_in_creation sent complaint]
+
   has_many :order_items, inverse_of: :order
+  has_many :feature_sets, through: :order_items
 
-  validates :permalink, uniqueness: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :city, presence: true
-  validates :zip_code, presence: true
-  validates :house_number, presence: true
-  validates :street, presence: true
-  validates :email, presence: true, email: true
+  validates :permalink, uniqueness: true, unless: :state_draft?
 
-  before_create :generate_permalink
-  before_create :generate_payment_reference
+  validates :first_name, presence: true, unless: :state_draft?
+  validates :last_name, presence: true, unless: :state_draft?
+  validates :city, presence: true, unless: :state_draft?
+  validates :zip_code, presence: true, unless: :state_draft?
+  validates :house_number, presence: true, unless: :state_draft?
+  validates :street, presence: true, unless: :state_draft?
+  validates :email, presence: true, email: true, unless: :state_draft?
+
+  before_save :generate_permalink, if: :changes_to_ordered?
+  before_save :generate_payment_reference, if: :changes_to_ordered?
+
+  private
 
   def generate_permalink
     self.permalink = Digest::SHA1.hexdigest(
-      self.last_name + self.email + Time.now.to_f.to_s + Kernel.rand(999_999).to_s
+      self.last_name + self.email + Time.zone.now.to_f.to_s + Kernel.rand(999_999).to_s
     )
   end
 
@@ -30,5 +36,14 @@ class Order < ApplicationRecord
     random = "%01d" % rand(0..9)
     o_i_count = "%01d" % self.order_items.count
     self.payment_reference = PaymentReference.create(total_orders + article_id + zip_code + random + o_i_count).to_s
+  end
+
+  def state_draft?
+    state == "draft"
+  end
+
+  def changes_to_ordered?
+    # CORRIGEREN NA AFWERKEN DEFINITIEF BESTELLEN!
+    self.previous_changes[:state].present?  
   end
 end

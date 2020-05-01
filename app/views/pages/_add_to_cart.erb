@@ -38,7 +38,7 @@
 
         <td><%=f_s.sold_per%></td>
         <td><%=f_s.price%></td>
-        <td><%=link_to "Koop"%></td>
+        <td><%= button_to "Koop", feature_set_order_items_path(f_s), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
