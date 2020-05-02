@@ -8,6 +8,7 @@ feature "create order" do
 
   before do
     visit "/artwork_details/#{artwork.id}"
+
     click_button "Koop"
 
     order = Order.first
@@ -46,5 +47,23 @@ feature "create order" do
 
     expect(order.payment_reference).to be_nil
   end
-  
+
+  it "doesn't create two orders if feature_set is added twice" do
+    click_button "Koop"
+
+    expect(Order.count).to eq 1
+  end
+
+  it "allows to add two feature_sets" do
+    feature_set_2 = create(:feature_set, artwork: artwork, price: 17, sold_per: 5)
+
+    visit "/artwork_details/#{artwork.id}"
+
+    within ".feature_set_#{feature_set_2.id}" do
+      click_button "Koop"
+    end
+
+    expect(Order.count).to eq 1
+    expect(OrderItem.count).to eq 2
+  end
 end
