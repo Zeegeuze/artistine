@@ -211,10 +211,12 @@ end
               span link_to "Bekijk", admin_artwork_feature_set_path(resource.id, feature_set.id)
               span link_to "Wijzig", edit_admin_artwork_feature_set_path(resource.id, feature_set.id)
               span link_to "Verwijder", admin_artwork_feature_set_path(resource.id, feature_set.id), method: :delete, data: { confirm: 'Wil je deze kenmerken set verwijderen?' }
-              if feature_set.active?
-              span link_to "Maak inactief", set_as_inactive_admin_artwork_feature_set_path(resource.id, feature_set.id), method: :patch
-              else
-                span link_to "Maak actief", make_active_admin_artwork_feature_set_path(resource.id, feature_set.id), method: :patch
+              div do
+                if feature_set.active?
+                  span link_to "Maak inactief", set_as_inactive_admin_artwork_feature_set_path(resource.id, feature_set.id), method: :patch
+                else
+                  span link_to "Maak actief", make_active_admin_artwork_feature_set_path(resource.id, feature_set.id), method: :patch
+                end
               end
             end
           end

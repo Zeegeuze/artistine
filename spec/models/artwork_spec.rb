@@ -42,6 +42,19 @@ RSpec.describe Artwork, type: :model do
         expect(Artwork.with_keyword(keyword_1)).to contain_exactly(artwork_with_first_keyword, artwork_with_first_and_second_keyword)
       end
     end
+
+    describe "not_sold_out" do
+      it "selects all artworks that are not sold out" do
+        not_sold_out_artwork = create(:artwork)
+        not_s_o_feature_set = create(:feature_set, pieces_available: 1, artwork: not_sold_out_artwork)
+        not_sold_out_artwork_2 = create(:artwork)
+        not_s_o_feature_set_2 = create(:feature_set, pieces_available: 1, artwork: not_sold_out_artwork_2)
+        sold_out_artwork = create(:artwork)
+        s_o_feature_set = create(:feature_set, pieces_available: 0, artwork: sold_out_artwork)
+
+        expect(Artwork.not_sold_out).to contain_exactly(not_sold_out_artwork, not_sold_out_artwork_2)
+      end
+    end
   end
 
   describe "instance methods" do

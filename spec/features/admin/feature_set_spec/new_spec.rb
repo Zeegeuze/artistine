@@ -53,6 +53,22 @@ feature "feature_set" do
         expect(page).to have_content "Glas"
       end
     end
+
+    describe "price validation" do
+      it "can be taken from feature_set" do
+        artwork.update! standard_price: 0
+
+        fill_in "feature_set_price", with: 80909
+
+        expect { click_button "Kenmerken set aanmaken" }.not_to raise_error
+      end
+
+      it "can be taken from artwork" do
+        artwork.update! standard_price: 15
+
+        expect { click_button "Kenmerken set aanmaken" }.not_to raise_error
+      end
+    end
   end
 
   describe "creating an artwork" do
