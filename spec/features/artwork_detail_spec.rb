@@ -19,6 +19,13 @@ feature "artwork_detail" do
       
       expect(page).to have_content ("De gevraagde pagina kon niet gevonden worden")
     end
+
+    it "indicated if total_amount is zero" do
+      create(:feature_set, artwork: artwork, pieces_available: 0, active: true)
+      visit "/artwork_details/#{artwork.id}"
+
+      expect(page).to have_content ("Helaas is dit product uitverkocht")
+    end
   end
     
   describe "remarks" do
@@ -45,6 +52,38 @@ feature "artwork_detail" do
       click_button "Opmerking toevoegen"
 
       expect(page).to have_content ("Tweede comment")
+    end
+  end
+
+  describe "feature_sets" do
+    it "shows the feature set if there are artworks available" do
+      available_feature_set = create(:feature_set, artwork: artwork, pieces_available: 2, active: true, price: 15)
+      visit "/artwork_details/#{artwork.id}"
+
+      expect(page).to have_css (".feature_set_#{available_feature_set.id}")
+    end
+
+    it "doesn't show any feature_sets if total_amount is zero" do
+      sold_out_feature_set = create(:feature_set, artwork: artwork, pieces_available: 0, active: true, price: 15)
+      visit "/artwork_details/#{artwork.id}"
+
+      expect(page).not_to have_css (".feature_set_#{sold_out_feature_set.id}")
+    end
+
+    it "doesn't show specific feature_set if pieces_available is zero" do
+      available_feature_set = create(:feature_set, artwork: artwork, pieces_available: 2, active: true, price: 15)
+      sold_out_feature_set = create(:feature_set, artwork: artwork, pieces_available: 0, active: true, price: 15)
+      visit "/artwork_details/#{artwork.id}"
+
+      expect(page).to have_css (".feature_set_#{available_feature_set.id}")
+      expect(page).not_to have_css (".feature_set_#{sold_out_feature_set.id}")
+    end
+
+    it "doesn't show colom if it is filled in in any feature_set" do
+      feature_set = create(:feature_set, artwork: artwork, pieces_available: 2, active: true, price: 15)
+
+      visit "/artwork_details/#{artwork.id}"
+      expect(page).not_to have_content "Kleur"
     end
   end
 end

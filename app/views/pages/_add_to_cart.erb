@@ -1,45 +1,55 @@
 <h2> Interesse? </h2>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <% unless @artwork.feature_sets.reject{|f_s| f_s.size.nil?}.empty? %>
-        <th scope="col">Maat</th>
-      <% end %>
- 
-      <% unless @artwork.feature_sets.reject{|f_s| f_s.color.nil?}.empty? %>
-        <th scope="col">Kleur</th>
-      <% end %>
-
-      <% unless @artwork.feature_sets.reject{|f_s| f_s.material.nil?}.empty? %>
-        <th scope="col">materiaal</th>
-      <% end %>
-
-      <th scope="col">Verkocht per</th>
-      <th scope="col">Prijs</th>
-      <th scope="col">Voeg toe</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @artwork.feature_sets.each do |f_s| %>
-      <tr class=<%="feature_set_#{f_s.id}"%>>
+<% if @artwork.total_amount == 0 %>
+  <h3> Helaas is dit product uitverkocht </h3>
+<% else %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
         <% unless @artwork.feature_sets.reject{|f_s| f_s.size.nil?}.empty? %>
-          <td><%=f_s.size%></td>
+          <th scope="col">Maat</th>
         <% end %>
-
+  
         <% unless @artwork.feature_sets.reject{|f_s| f_s.color.nil?}.empty? %>
-          <td><%=f_s.color%></td>
+          <th scope="col">Kleur</th>
         <% end %>
 
         <% unless @artwork.feature_sets.reject{|f_s| f_s.material.nil?}.empty? %>
-          <td><%=f_s.material%></td>
+          <th scope="col">Materiaal</th>
         <% end %>
 
-        <td><%=f_s.sold_per%></td>
-        <td><%=f_s.price%></td>
-        <td><%= button_to "Koop", feature_set_order_items_path(f_s) %></td>
+        <% unless @artwork.feature_sets.reject{|f_s| f_s.sold_per == 1}.empty? %>
+          <th scope="col">Verkocht per</th>
+        <% end %>
+
+        <th scope="col">Prijs</th>
+        <th scope="col">Voeg toe</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @artwork.feature_sets.each do |f_s| %>
+        <% unless f_s.pieces_available == 0 %>
+          <tr class=<%="feature_set_#{f_s.id}"%>>
+            <% unless @artwork.feature_sets.reject{|f_s| f_s.size.nil?}.empty? %>
+              <td><%=f_s.size%></td>
+            <% end %>
+
+            <% unless @artwork.feature_sets.reject{|f_s| f_s.color.nil?}.empty? %>
+              <td><%=f_s.color%></td>
+            <% end %>
+
+            <% unless @artwork.feature_sets.reject{|f_s| f_s.material.nil?}.empty? %>
+              <td><%=f_s.material%></td>
+            <% end %>
+
+            <% unless @artwork.feature_sets.reject{|f_s| f_s.sold_per == 1}.empty? %>
+              <td><%=f_s.sold_per%></td>
+            <% end %>
+            <td><%=f_s.price%></td>
+            <td><%= button_to "Koop", feature_set_order_items_path(f_s) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
