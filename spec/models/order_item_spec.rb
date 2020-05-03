@@ -16,8 +16,8 @@ RSpec.describe OrderItem, type: :model do
       expect(build(:order_item, price: nil)).to have(1).error_on(:price)
     end    
 
-    it "must have an artwork" do
-      expect(build(:order_item, artwork: nil)).to have(1).error_on(:artwork)
+    it "must have an feature_set" do
+      expect(build(:order_item, feature_set: nil)).to have(1).error_on(:feature_set)
     end
 
     it "must have an order" do

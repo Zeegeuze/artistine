@@ -1,6 +1,6 @@
 <div style="margin-bottom: 15px", class="col-lg-4">
   <div class="card">
-    <%=(cl_image_tag artwork.images.first.key, height: 250, class: "card-image-top.border-bottom") if artwork.images.exists?%>
+    <%=link_to ((cl_image_tag artwork.images.first.key, height: 250) if artwork.images.exists?), artwork_id_path(artwork.id), class: "card-img-top", style: "text-align: center"%>
 
     <div class="card-body">
       <h5 class="card-title"><%=link_to artwork.name, artwork_id_path(artwork.id)%></h5>

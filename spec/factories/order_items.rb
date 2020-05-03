@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :order_item do
-    artwork { Artwork.first || create(:artwork) }
+    feature_set { FeatureSet.first || create(:feature_set) }
     order { Order.first || create(:order) }
     qty { 1 }
     price { 15 }

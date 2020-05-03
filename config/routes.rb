@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get 'artwork_details/:id', to: 'pages#artwork_show', as: :artwork_id
   
   resources :remarks, only: [:create]
+  
+  resources :feature_sets, only: [:show, :index] do
+    resources :order_items
+  end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, ActiveAdmin::Devise.config
