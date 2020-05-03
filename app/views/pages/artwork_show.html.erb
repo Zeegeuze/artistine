@@ -37,7 +37,11 @@
       <div class="col info-section">
         <div class= "col">
           <h3> Prijs </h3>
-          <p class= "marg_l_8"> <%= number_to_currency(@artwork.standard_price) %> </p>
+          <% if @artwork.total_amount == 0 %>
+            <h4 class= "marg_l_8"> Uitverkocht </h4>
+          <% else %>
+            <p class= "marg_l_8"> <%= number_to_currency(@artwork.standard_price) %> </p>
+          <% end %>
           <h3> Beschrijving </h3>
           <p class= "marg_l_8"> <%= @artwork.description %> </p>
           <h3> Categorieën </h3>

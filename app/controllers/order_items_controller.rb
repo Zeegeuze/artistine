@@ -13,7 +13,6 @@ class OrderItemsController < ApplicationController
     @order_item.material = @order_item.feature_set.material
     @order_item.size = @order_item.feature_set.size
     @order.save!
-    # @order_item.save!  
 
     session[:order_id] = @order.id
     

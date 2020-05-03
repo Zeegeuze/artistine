@@ -7,6 +7,10 @@ RSpec.describe FeatureSet, type: :model do
     it "is valid" do
       expect(build(:feature_set)).to be_valid
     end
+
+    it "has a price" do
+      expect(build(:feature_set, price: nil)).to have(1).error_on(:price)
+    end
   end
 
   describe "scopes" do

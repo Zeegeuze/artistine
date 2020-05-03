@@ -22,10 +22,14 @@ class Artwork < ApplicationRecord
   }
 
   scope :published, -> { where(published: true) }
-
+  
+  scope :not_sold_out, -> { includes(:feature_sets)
+    .where.not(feature_sets: { pieces_available: 0 }) 
+    .distinct
+  }
 
   # def price(num)
-  #   @view.number_to_currency(num)
+  #   number_to_currency(num)
   # end
 
   def set_as_published!

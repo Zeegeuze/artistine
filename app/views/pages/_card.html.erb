@@ -4,7 +4,11 @@
 
     <div class="card-body">
       <h5 class="card-title"><%=link_to artwork.name, artwork_id_path(artwork.id)%></h5>
-      <h3 class="test"><%=number_to_currency(artwork.standard_price)%></h3>
+      <% if artwork.total_amount == 0 %>
+          <h3> Uitverkocht </h3>
+        <% else %>
+          <h3><%=number_to_currency(artwork.standard_price)%></h3>
+        <% end %>
       <p class="card-text"><%=artwork.description%></p>
     </div>
     <div class="card-footer">
