@@ -27,10 +27,14 @@ ActiveAdmin.register Artwork do
       @feature_set.size = params[:artwork][:feature_sets][:size].empty? ? @artwork.standard_size : params[:artwork][:feature_sets][:size]
       @feature_set.sold_per = params[:artwork][:feature_sets][:sold_per].empty? ? @artwork.standard_sold_per : params[:artwork][:feature_sets][:sold_per]
       @feature_set.pieces_available = params[:artwork][:feature_sets][:pieces_available].empty? ? 1 : params[:artwork][:feature_sets][:pieces_available]
-      @feature_set.save!
-
-      transaction_notice = "Het kunstwerk werk correct toegevoegd."
-      create!(notice: transaction_notice) { admin_artworks_path }
+  
+      respond_to do |format|
+        if @feature_set.save
+          format.html { redirect_to admin_artworks_path, notice: "Het kunstwerk werk correct toegevoegd." }
+        else
+          format.html { redirect_back fallback_location: default_fallback_location, alert: "Er is iets fout gelopen. Bent u zeker dat standaard prijs of kenmerken set prijs opgegeven zijn?" }
+        end
+      end
     end
 
     def update
@@ -240,7 +244,7 @@ end
       f.li h3 "De standaard categorieën worden gebruikt indien deze in een kenmerken set niet zijn opgegeven:"
       f.input :standard_color
       f.input :standard_material
-      f.input :standard_price
+      f.input :standard_price, hint: "Opgelet: Standaard prijs of prijs van kenmerken set moet opgegeven zijn! Kunstwerk kan niet bewaard worden zonder prijs."
       f.input :standard_size, hint: "In centimeter"
       f.input :standard_sold_per
     end
@@ -259,7 +263,7 @@ end
           g.inputs do
             g.input :color
             g.input :material
-            g.input :price
+            g.input :price, hint: "Opgelet: Standaard prijs of prijs van kenmerken set moet opgegeven zijn! Kunstwerk kan niet bewaard worden zonder prijs."
             g.input :size, hint: "In centimeter"
             g.input :sold_per
             g.input :pieces_available

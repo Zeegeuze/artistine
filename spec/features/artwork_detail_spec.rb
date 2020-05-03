@@ -3,7 +3,7 @@
 require "rails_helper"
 
 feature "artwork_detail" do
-  let!(:artwork) { create(:artwork, published: true, name: "Wel gepubliceerd") }
+  let!(:artwork) { create(:artwork, :with_feature_set, published: true, name: "Wel gepubliceerd") }
 
   describe "artwork" do
     it "only shows published artworks" do      
@@ -20,8 +20,9 @@ feature "artwork_detail" do
       expect(page).to have_content ("De gevraagde pagina kon niet gevonden worden")
     end
 
-    it "indicated if total_amount is zero" do
-      create(:feature_set, artwork: artwork, pieces_available: 0, active: true)
+    it "indicated if total_amount is zero" do # sold_out wel zichtbaar zodat dit na maken order kan terug gevonden worden
+      artwork.feature_sets.first.update! pieces_available: 0
+
       visit "/artwork_details/#{artwork.id}"
 
       expect(page).to have_content ("Helaas is dit product uitverkocht")

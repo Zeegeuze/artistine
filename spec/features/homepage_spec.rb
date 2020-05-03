@@ -4,7 +4,7 @@ require "rails_helper"
 
 feature "homepage" do
   let(:keyword) { create(:keyword, :on_homepage, name: "Beestenboel") }
-  let!(:artwork) { create(:artwork, published: true, name: "Wel gepubliceerd", keywords: [keyword]) }
+  let!(:artwork) { create(:artwork, :with_feature_set, published: true, name: "Wel gepubliceerd", keywords: [keyword]) }
 
   describe "homepage" do
     describe "keywords" do

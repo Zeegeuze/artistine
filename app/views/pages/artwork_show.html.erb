@@ -1,4 +1,4 @@
-<%if Artwork.published.not_sold_out.where(id: params[:id]).exists?%>
+<%if Artwork.published.where(id: params[:id]).exists?%>
   <%@artwork = Artwork.find params[:id]%>
 
     <h1><%=@artwork.name%></h1>

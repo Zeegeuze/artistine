@@ -15,6 +15,7 @@ feature "artwork" do
     before do
       fill_in "artwork_name", with: "Naam"
       fill_in "artwork_description", with: "Beschrijving"
+      fill_in "artwork_feature_sets_price", with: 8
 
       click_button "Kunstwerk aanmaken"
     end
